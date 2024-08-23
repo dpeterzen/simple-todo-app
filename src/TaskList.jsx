@@ -1,6 +1,22 @@
 import { useState } from 'react';
 
 /* eslint-disable react/prop-types */
+export default function TaskList({tasks, onDeleteTask, onSaveTask}) {
+  return (
+    <ul>
+      {tasks.map((t) => (
+        <Task
+          onDelete={onDeleteTask}
+          onSave={onSaveTask}
+          key={t.id}
+          task={t}>
+        </Task> 
+      ))}
+    </ul>
+  );
+};
+
+
 function Task({task, onDelete, onSave}) {
   const [isEditing, setIsEditing] = useState(false);
   const [inputVal, setInputVal] = useState(task.text);
@@ -35,20 +51,3 @@ function Task({task, onDelete, onSave}) {
     </li>
   );
 };
-
-function TaskList({tasks, onDeleteTask, onSaveTask}) {
-  return (
-    <ul>
-      {tasks.map((t) => (
-        <Task
-          onDelete={onDeleteTask}
-          onSave={onSaveTask}
-          key={t.id}
-          task={t}>
-        </Task> 
-      ))}
-    </ul>
-  );
-};
-
-export default TaskList;
